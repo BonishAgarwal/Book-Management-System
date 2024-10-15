@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+from flasgger import Swagger
 
 # Initialize the database instance
 db = SQLAlchemy()
@@ -19,6 +20,7 @@ async_session = sessionmaker(
 def create_app():
     app = Flask(__name__)
 
+    Swagger(app)
     # Configure the app
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL # Update with your DB URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications

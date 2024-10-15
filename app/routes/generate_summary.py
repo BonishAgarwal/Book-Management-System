@@ -3,10 +3,13 @@ from app.services.llama_service import generate_summary
 from app.utils.db_utils import db_session
 from app import db
 from app.models import Book
+from app.utils.decorators.auth import authenticate
+
 # Define a blueprint for book-summary-related routes
 bp = Blueprint('generate_summary', __name__)
 
 @bp.route("/books/<int:book_id>/generate-summary", methods=['POST'])
+@authenticate
 async def generate_book_summary(book_id):
     data = request.get_json()
     
