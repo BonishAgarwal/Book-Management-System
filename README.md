@@ -51,6 +51,8 @@ The Book Management System is a Flask-based web application that allows users to
     ```sql
     CREATE DATABASE book_management_system;
 
+5. **Create Tables in SQL database**
+    - Run the commands mentioned in `queries.sql` file
 5. **Run the application**
     ```bash
     flask run
