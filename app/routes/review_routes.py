@@ -8,8 +8,8 @@ from app.utils.decorators.auth import authenticate
 bp = Blueprint('review_routes', __name__)
 
 # Route to add review for a particular book
-@bp.route('/books/<int:book_id>/reviews', methods=['POST'])
 @authenticate
+@bp.route('/books/<int:book_id>/reviews', methods=['POST'])
 async def add_review(book_id):
     """
     Add a review to a book
@@ -86,8 +86,8 @@ async def add_review(book_id):
 
 
 # Route to get all reviews for a particular book
-@bp.route("/books/<int:book_id>/reviews", methods=['GET'])
 @authenticate
+@bp.route("/books/<int:book_id>/reviews", methods=['GET'])
 async def get_reviews(book_id):
     """
     Retrieve all reviews for a specific book

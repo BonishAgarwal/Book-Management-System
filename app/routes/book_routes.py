@@ -10,8 +10,8 @@ from app.utils.decorators.auth import authenticate
 bp = Blueprint('book_routes', __name__)
 
 # Route to add a new book (POST /books)
-@bp.route('/books', methods=['POST'])
 @authenticate
+@bp.route('/books', methods=['POST'])
 async def add_book():
     """
     Add a new book
@@ -87,8 +87,8 @@ async def add_book():
     return jsonify({"message": "Book added successfully", "book_id": new_book.id}), 201
 
 # Route to get all books (GET /books)
-@bp.route('/books', methods=['GET'])
 @authenticate
+@bp.route('/books', methods=['GET'])
 async def get_books():
     """
     Retrieve all books
@@ -146,8 +146,8 @@ async def get_books():
         } for book in books_list]), 200
     
 # Route to get a book by ID (GET /books/<id>)
-@bp.route('/books/<int:id>', methods=['GET'])
 @authenticate
+@bp.route('/books/<int:id>', methods=['GET'])
 async def get_book(id):
     """
     Retrieve a book by ID
@@ -221,8 +221,8 @@ async def get_book(id):
         }), 200
 
 # Route to update a book by ID (PUT /books/<id>)
-@bp.route('/books/<int:id>', methods=['PUT'])
 @authenticate
+@bp.route('/books/<int:id>', methods=['PUT'])
 async def update_book(id):
     """
     Update a book by ID
@@ -305,8 +305,8 @@ async def update_book(id):
         return jsonify({"message": "Book updated successfully"}), 200
 
 # Route to delete a book by ID (DELETE /books/<id>)
-@bp.route('/books/<int:id>', methods=['DELETE'])
 @authenticate
+@bp.route('/books/<int:id>', methods=['DELETE'])
 async def delete_book(id):
     """
     Delete a book by ID
@@ -355,8 +355,8 @@ async def delete_book(id):
         return jsonify({"message": "Book deleted successfully"}), 200
 
 # Route to get summary for a book by ID (GET /books/<id>/summary)
-@bp.route('/books/<int:id>/summary', methods=['GET'])
 @authenticate
+@bp.route('/books/<int:id>/summary', methods=['GET'])
 async def get_book_summary(id):
     """
     Retrieve a book's summary and average rating by ID

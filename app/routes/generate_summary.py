@@ -8,9 +8,59 @@ from app.utils.decorators.auth import authenticate
 # Define a blueprint for book-summary-related routes
 bp = Blueprint('generate_summary', __name__)
 
-@bp.route("/books/<int:book_id>/generate-summary", methods=['POST'])
 @authenticate
+@bp.route("/books/<int:book_id>/generate-summary", methods=['POST'])
 async def generate_book_summary(book_id):
+    """
+    Generate a summary for a book by ID
+    ---
+    security:
+      - BasicAuth: []  # Requires Basic Authentication
+    parameters:
+      - name: book_id
+        in: path
+        type: integer
+        required: true
+        description: The ID of the book for which to generate the summary.
+        example: 1
+      - in: body
+        name: content
+        required: true
+        description: JSON object containing the content to summarize.
+        schema:
+          type: object
+          properties:
+            content:
+              type: string
+              description: The content to be summarized.
+              example: "This book provides an in-depth look at..."
+    responses:
+      200:
+        description: Summary generated successfully
+        schema:
+          type: object
+          properties:
+            summary:
+              type: string
+              description: The generated summary of the book.
+              example: "A brief overview of the book's main themes."
+      400:
+        description: Missing required field
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Missing required field: content"
+      500:
+        description: Internal server error
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: "An error occurred while generating the summary."
+    """
     data = request.get_json()
     
     # Validate incoming data (you can improve this with Pydantic later)
